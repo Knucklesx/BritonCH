@@ -1,0 +1,41 @@
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" formControlName="nome" required>
+  </div>
+  <div>
+    <label for="cpf">CPF:</label>
+    <input type="text" id="cpf" name="cpf" formControlName="cpf" required>
+  </div>
+  <div>
+    <label for="dataNascimento">Data de Nascimento:</label>
+    <input type="date" id="dataNascimento" name="dataNascimento" formControlName="dataNascimento" required>
+  </div>
+  <div>
+    <label for="telefone">Telefone:</label>
+    <input type="tel" id="telefone" name="telefone" formControlName="telefone" required>
+  </div>
+  <div>
+    <div>
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" name="cep" formControlName="cep">
+    </div>
+    <label for="end1">Endereco:</label>
+    <input type="text" id="end1" name="end1" formControlName="end1" required>
+    <div>
+      <label for="end2">Endereco 2:</label>
+      <input type="text" id="end2" name="end2" formControlName="end2">
+    </div>
+    <label for="comp">Complemento:</label>
+    <input type="text" id="comp" name="comp" formControlName="comp">
+    <label for="bairro">Bairro:</label>
+    <input type="text" id="bairro" name="bairro" formControlName="bairro" required>
+    <label for="cidade">Cidade:</label>
+    <input type="text" id="cidade" name="cidade" formControlName="cidade" required>
+    <label for="estado">Estado:</label>
+    <input type="text" id="estado" name="estado" formControlName="estado" class="estado">
+    <div>
+      <button type="submit">Cadastrar</button>
+    </div>
+  </div>
+</form>
