@@ -1,4 +1,11 @@
 import { Routes } from '@angular/router';
-import { FormsComponent } from './forms/forms.component';
 
-export const routes: Routes = [{ path: '', component: FormsComponent }];
+import { ClientFormsComponent } from './client-form/client-form.component';
+import { LoginComponent } from './login/login.component';
+import { UserFormComponent } from './user-form/user-form.component';
+
+export const routes: Routes = [
+  { path: '', component: LoginComponent },
+  { path: 'client-register', component: ClientFormsComponent },
+  { path: 'user-register', component: UserFormComponent },
+];

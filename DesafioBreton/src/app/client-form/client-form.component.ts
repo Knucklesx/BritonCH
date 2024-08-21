@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-forms',
+  selector: 'app-client-form',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './forms.component.html',
-  styleUrl: './forms.component.css',
+  templateUrl: './client-form.component.html',
+  styleUrl: './client-form.component.css',
 })
-export class FormsComponent {
+export class ClientFormsComponent {
   clientForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
