@@ -1,0 +1,6 @@
+@BretonBackend_HostAddress = http://localhost:5069
+
+GET {{BretonBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

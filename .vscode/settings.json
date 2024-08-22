@@ -1,0 +1,4 @@
+{
+	"dotnet.defaultSolution": "BretonBackend.sln",
+	"FSharp.suggestGitignore": false
+}
