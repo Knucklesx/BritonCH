@@ -334,3 +334,12 @@ BretonBackend/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.
 BretonBackend/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll
 BretonBackend/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
 BretonBackend/.env
+BretonBackend/Migrations/20240822203148_InitialMigration.cs
+BretonBackend/Migrations/20240822203148_InitialMigration.Designer.cs
+BretonBackend/Migrations/20240823111543_UpdateClienteIdGeneration.cs
+BretonBackend/Migrations/20240823111543_UpdateClienteIdGeneration.Designer.cs
+BretonBackend/Migrations/20240823123045_LoginAndUserMigration.cs
+BretonBackend/Migrations/20240823123045_LoginAndUserMigration.Designer.cs
+BretonBackend/Migrations/20240823123834_AddCors.cs
+BretonBackend/Migrations/20240823123834_AddCors.Designer.cs
+BretonBackend/Migrations/BretonContextModelSnapshot.cs

@@ -28,17 +28,24 @@ export class LoginComponent {
 
   onSubmit() {
     console.log(this.loginForm.value);
-    // const { email, senha } = this.loginForm.value;
-    const ll = this.loginForm.value;
+    const { email, senha } = this.loginForm.value;
     this.http
-      // .post('http://localhost:3000/users', { email, senha })
-      .get('http://localhost:3000/users', ll)
-      .subscribe((response: any) => {
-        if (response.success) {
-          this.router.navigate(['/main']);
-        } else {
+      .post(
+        'http://localhost:5069/api/Login/login',
+        { email, senha },
+        { responseType: 'text' }
+      )
+      .subscribe(
+        (response: string) => {
+          if (response === 'Login successful') {
+            this.router.navigate(['/user-register']);
+          } else {
+            this.dialog.open(ErrorModalComponent);
+          }
+        },
+        (error) => {
           this.dialog.open(ErrorModalComponent);
         }
-      });
+      );
   }
 }
