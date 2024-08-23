@@ -23,12 +23,12 @@ export class ClientFormsComponent {
     this.clientForm = this.fb.group({
       nome: ['', Validators.required],
       cpf: ['', [Validators.required, this.cpfValidator]],
-      dataNascimento: ['', Validators.required],
+      data_de_Nascimento: ['', Validators.required],
       telefone: ['', Validators.required],
       cep: ['', [Validators.required, this.numericValidator]],
       logradouro: ['', Validators.required],
       numero: ['', Validators.required],
-      comp: [''],
+      complemento: [''],
       bairro: ['', Validators.required],
       cidade: ['', Validators.required],
       uf: ['', Validators.required],
@@ -37,9 +37,21 @@ export class ClientFormsComponent {
 
   onSubmit() {
     if (this.clientForm.valid) {
-      console.log(this.clientForm.value);
+      const clientData = {
+        ...this.clientForm.value,
+        estado: this.clientForm.get('uf')?.value,
+      };
+      console.log(clientData);
+      this.http.post('http://localhost:5069/api/Client', clientData).subscribe({
+        next: (data) => {
+          console.log('Cliente cadastrado com sucesso', data);
+        },
+        error: (error) => {
+          console.error('Erro ao cadastrar cliente', error);
+        },
+      });
     } else {
-      this.clientForm.markAllAsTouched(); // Marca todos os campos como tocados para exibir as mensagens de erro
+      this.clientForm.markAllAsTouched();
     }
   }
 

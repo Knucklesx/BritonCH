@@ -16,10 +16,12 @@
     </div>
   </div>
   <div>
-    <label for="dataNascimento">Data de Nascimento:</label>
-    <input type="date" id="dataNascimento" name="dataNascimento" formControlName="dataNascimento"
-      [class.invalid]="clientForm.get('dataNascimento')?.invalid && clientForm.get('dataNascimento')?.touched" required>
-    <div *ngIf="clientForm.get('dataNascimento')?.invalid && clientForm.get('dataNascimento')?.touched" class="error">
+    <label for="data_de_Nascimento">Data de Nascimento:</label>
+    <input type="date" id="data_de_Nascimento" name="data_de_Nascimento" formControlName="data_de_Nascimento"
+      [class.invalid]="clientForm.get('data_de_Nascimento')?.invalid && clientForm.get('data_de_Nascimento')?.touched"
+      required>
+    <div *ngIf="clientForm.get('data_de_Nascimento')?.invalid && clientForm.get('data_de_Nascimento')?.touched"
+      class="error">
       Data de Nascimento é obrigatória.
     </div>
   </div>
@@ -60,8 +62,8 @@
     </div>
   </div>
   <div>
-    <label for="comp">Complemento:</label>
-    <input type="text" id="comp" name="comp" formControlName="comp">
+    <label for="complemento">Complemento:</label>
+    <input type="text" id="complemento" name="complemento" formControlName="complemento">
   </div>
   <div>
     <label for="bairro">Bairro:</label>

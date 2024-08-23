@@ -13,14 +13,11 @@ export interface ClientFull {
   data_de_nascimento: string;
   telefone: string;
   CEP: string;
-  endereco: Endereco;
-}
-
-interface Endereco {
-  end1: string;
-  end2: string;
+  logradouro: string;
+  numero: string;
   complemento: string;
   bairro: string;
   cidade: string;
-  estado: string;
+  uf: string;
+  cep: string;
 }

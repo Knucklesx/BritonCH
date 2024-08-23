@@ -29,7 +29,15 @@ namespace BretonBackend.Models
         public required string Cep { get; set; }
 
         [Required]
-        public required Endereco Endereco { get; set; }
+        public required string Logradouro { get; set; }
+        public required string Numero { get; set; }
+        public required string Complemento { get; set; }
+        [Required]
+        public required string Bairro { get; set; }
+        [Required]
+        public required string Cidade { get; set; }
+        [Required]
+        public required string Estado { get; set; }
 
     }
 }

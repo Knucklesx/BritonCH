@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router'; // Importe o Router
 import { Client } from '../helper/client.interface';
 
 @Component({
@@ -15,7 +16,7 @@ export class MainDashboardComponent implements OnInit {
   clients: Client[] = [];
   filteredClients: Client[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {} // Injete o Router
 
   ngOnInit() {
     this.fetchClients();
@@ -46,7 +47,8 @@ export class MainDashboardComponent implements OnInit {
   }
 
   addClient() {
-    console.log('Adicionar cliente');
+    console.log('clicou');
+    this.router.navigate(['/client-register']); // Redirecione para a rota /register-client
   }
 
   editClient(client: Client) {

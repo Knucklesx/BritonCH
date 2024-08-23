@@ -47,6 +47,8 @@ namespace BretonBackend.Controller
         [HttpPost]
         public ActionResult Post([FromBody] Cliente cliente)
         {
+
+
             _bretonContext.Clientes.Add(cliente);
             _bretonContext.SaveChanges();
             return CreatedAtAction(nameof(Get), new { id = cliente.Id }, cliente);
