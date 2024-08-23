@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BretonBackend.Data;
 using BretonBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,20 +17,27 @@ namespace BretonBackend.Controller
         //UPDATE => PUT (Or PATCH => Partial Update)
         //DELETE => DELETE
 
-        private static readonly List<Cliente> _clientes = [];
+        // private static readonly List<Cliente> _clientes = []; 
+        private readonly BretonContext _bretonContext;
+
+        public ClientController(BretonContext bretonContext)
+        {
+            _bretonContext = bretonContext;
+        }
 
         //GET api/client
         [HttpGet]
         public ActionResult<IEnumerable<Cliente>> Get()
         {
-            return Ok(_clientes);
+            var clientes = _bretonContext.Clientes.ToList();
+            return Ok(clientes);
         }
 
         //GET api/client/{id}
         [HttpGet("{id}")]
         public ActionResult<Cliente> Get(int id)
         {
-            var cliente = _clientes.FirstOrDefault(c => c.Id == id);
+            var cliente = _bretonContext.Clientes.FirstOrDefault(c => c.Id == id);
             if (cliente == null)
             {
                 return NotFound();
@@ -41,7 +49,8 @@ namespace BretonBackend.Controller
         [HttpPost]
         public ActionResult Post([FromBody] Cliente cliente)
         {
-            _clientes.Add(cliente);
+            _bretonContext.Clientes.Add(cliente);
+            _bretonContext.SaveChanges();
             return CreatedAtAction(nameof(Get), new { id = cliente.Id }, cliente);
         }
 
@@ -54,7 +63,7 @@ namespace BretonBackend.Controller
                 return BadRequest();
             }
 
-            var clienteExistente = _clientes.FirstOrDefault(c => c.Id == id);
+            var clienteExistente = _bretonContext.Clientes.FirstOrDefault(c => c.Id == id);
 
             if (clienteExistente == null)
             {
@@ -69,12 +78,12 @@ namespace BretonBackend.Controller
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            var cliente = _clientes.FirstOrDefault(c => c.Id == id);
+            var cliente = _bretonContext.Clientes.FirstOrDefault(c => c.Id == id);
             if (cliente == null)
             {
                 return NotFound();
             }
-            _clientes.Remove(cliente);
+            _bretonContext.Clientes.Remove(cliente);
             return NoContent();
         }
     }
