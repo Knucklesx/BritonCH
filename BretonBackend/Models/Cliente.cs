@@ -12,7 +12,8 @@ namespace BretonBackend.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         [Required]
-        public string Nome { get; set; }
+        public required string Nome { get; set; }
     }
 }

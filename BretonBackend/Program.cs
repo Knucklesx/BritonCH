@@ -1,11 +1,26 @@
 using BretonBackend.Data;
 using Microsoft.EntityFrameworkCore;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Env.Load();
+
+builder.Configuration.AddEnvironmentVariables();
+
+
+// builder.Services.AddDbContext<BretonContext>(options =>
+//     options.UseMySql(
+//         builder.Configuration.GetConnectionString("BretonConnection"),
+//         new MySqlServerVersion(new Version(8, 0, 25))
+//     )
+// );
+
+builder.Configuration.AddEnvironmentVariables();
+
 builder.Services.AddDbContext<BretonContext>(options =>
     options.UseMySql(
-        builder.Configuration.GetConnectionString("BretonConnection"),
+        Environment.GetEnvironmentVariable("CONNECTION_STRING"),
         new MySqlServerVersion(new Version(8, 0, 25))
     )
 );
