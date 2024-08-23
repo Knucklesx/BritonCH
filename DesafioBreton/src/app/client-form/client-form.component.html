@@ -1,41 +1,93 @@
 <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
   <div>
     <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" formControlName="nome" required>
+    <input type="text" id="nome" name="nome" formControlName="nome"
+      [class.invalid]="clientForm.get('nome')?.invalid && clientForm.get('nome')?.touched" required>
+    <div *ngIf="clientForm.get('nome')?.invalid && clientForm.get('nome')?.touched" class="error">
+      Nome é obrigatório.
+    </div>
   </div>
   <div>
     <label for="cpf">CPF:</label>
-    <input type="text" id="cpf" name="cpf" formControlName="cpf" required>
+    <input type="text" id="cpf" name="cpf" formControlName="cpf"
+      [class.invalid]="clientForm.get('cpf')?.invalid && clientForm.get('cpf')?.touched" required>
+    <div *ngIf="clientForm.get('cpf')?.invalid && clientForm.get('cpf')?.touched" class="error">
+      CPF é obrigatório e deve conter 11 números.
+    </div>
   </div>
   <div>
     <label for="dataNascimento">Data de Nascimento:</label>
-    <input type="date" id="dataNascimento" name="dataNascimento" formControlName="dataNascimento" required>
+    <input type="date" id="dataNascimento" name="dataNascimento" formControlName="dataNascimento"
+      [class.invalid]="clientForm.get('dataNascimento')?.invalid && clientForm.get('dataNascimento')?.touched" required>
+    <div *ngIf="clientForm.get('dataNascimento')?.invalid && clientForm.get('dataNascimento')?.touched" class="error">
+      Data de Nascimento é obrigatória.
+    </div>
   </div>
   <div>
     <label for="telefone">Telefone:</label>
-    <input type="tel" id="telefone" name="telefone" formControlName="telefone" required>
+    <input type="tel" id="telefone" name="telefone" formControlName="telefone"
+      [class.invalid]="clientForm.get('telefone')?.invalid && clientForm.get('telefone')?.touched" required>
+    <div *ngIf="clientForm.get('telefone')?.invalid && clientForm.get('telefone')?.touched" class="error">
+      Telefone é obrigatório.
+    </div>
   </div>
   <div>
-    <div>
-      <label for="cep">CEP:</label>
-      <input type="text" id="cep" name="cep" formControlName="cep">
+    <label for="cep">CEP:</label>
+    <div class="cep-container">
+      <input type="text" id="cep" name="cep" formControlName="cep"
+        [class.invalid]="clientForm.get('cep')?.invalid && clientForm.get('cep')?.touched" (input)="onCepInput()"
+        required>
+      <button type="button" class="buscar-cep" (click)="buscarEndereco()">Buscar</button>
     </div>
-    <label for="end1">Endereco:</label>
-    <input type="text" id="end1" name="end1" formControlName="end1" required>
-    <div>
-      <label for="end2">Endereco 2:</label>
-      <input type="text" id="end2" name="end2" formControlName="end2">
+    <div *ngIf="clientForm.get('cep')?.invalid && clientForm.get('cep')?.touched" class="error">
+      CEP é obrigatório e deve conter 8 números.
     </div>
+  </div>
+  <div>
+    <label for="logradouro">Logradouro:</label>
+    <input type="text" id="logradouro" name="logradouro" formControlName="logradouro"
+      [class.invalid]="clientForm.get('logradouro')?.invalid && clientForm.get('logradouro')?.touched" required>
+    <div *ngIf="clientForm.get('logradouro')?.invalid && clientForm.get('logradouro')?.touched" class="error">
+      Logradouro é obrigatório.
+    </div>
+  </div>
+  <div>
+    <label for="numero">Número:</label>
+    <input type="text" id="numero" name="numero" formControlName="numero"
+      [class.invalid]="clientForm.get('numero')?.invalid && clientForm.get('numero')?.touched" required>
+    <div *ngIf="clientForm.get('numero')?.invalid && clientForm.get('numero')?.touched" class="error">
+      Número é obrigatório.
+    </div>
+  </div>
+  <div>
     <label for="comp">Complemento:</label>
     <input type="text" id="comp" name="comp" formControlName="comp">
+  </div>
+  <div>
     <label for="bairro">Bairro:</label>
-    <input type="text" id="bairro" name="bairro" formControlName="bairro" required>
-    <label for="cidade">Cidade:</label>
-    <input type="text" id="cidade" name="cidade" formControlName="cidade" required>
-    <label for="estado">Estado:</label>
-    <input type="text" id="estado" name="estado" formControlName="estado" class="estado">
-    <div>
-      <button type="submit">Cadastrar</button>
+    <input type="text" id="bairro" name="bairro" formControlName="bairro"
+      [class.invalid]="clientForm.get('bairro')?.invalid && clientForm.get('bairro')?.touched" required>
+    <div *ngIf="clientForm.get('bairro')?.invalid && clientForm.get('bairro')?.touched" class="error">
+      Bairro é obrigatório.
     </div>
+  </div>
+  <div>
+    <label for="cidade">Cidade:</label>
+    <input type="text" id="cidade" name="cidade" formControlName="cidade"
+      [class.invalid]="clientForm.get('cidade')?.invalid && clientForm.get('cidade')?.touched" required>
+    <div *ngIf="clientForm.get('cidade')?.invalid && clientForm.get('cidade')?.touched" class="error">
+      Cidade é obrigatória.
+    </div>
+  </div>
+  <div>
+    <label for="uf">Estado:</label>
+    <input type="text" id="uf" name="uf" formControlName="uf" class="uf"
+      [class.invalid]="clientForm.get('uf')?.invalid && clientForm.get('uf')?.touched" required>
+    <div *ngIf="clientForm.get('uf')?.invalid && clientForm.get('uf')?.touched" class="error">
+      Estado é obrigatório.
+    </div>
+  </div>
+  <div>
+    <button type="submit" class="cadastrar">Cadastrar</button>
   </div>
 </form>

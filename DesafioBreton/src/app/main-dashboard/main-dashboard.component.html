@@ -1,0 +1,35 @@
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <ul>
+      <li><a href="#">Opção 1</a></li>
+      <li><a href="#">Opção 2</a></li>
+      <li><a href="#">Opção 3</a></li>
+    </ul>
+  </aside>
+  <main class="main-content">
+    <div class="header">
+      <input type="text" placeholder="Buscar clientes..." (input)="filterClients($event)">
+      <button (click)="addClient()">Adicionar Cliente</button>
+    </div>
+    <div class="client-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of filteredClients">
+            <td>{{ client.nome }}</td>
+            <td>{{ client.cpf }}</td>
+            <td>{{ client.telefone }}</td>
+            <td><button (click)="editClient(client)">Editar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

@@ -16,8 +16,6 @@ namespace BretonBackend.Controller
         //READ => GET
         //UPDATE => PUT (Or PATCH => Partial Update)
         //DELETE => DELETE
-
-        // private static readonly List<Cliente> _clientes = []; 
         private readonly BretonContext _bretonContext;
 
         public ClientController(BretonContext bretonContext)

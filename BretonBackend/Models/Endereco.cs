@@ -7,29 +7,20 @@ using System.Threading.Tasks;
 
 namespace BretonBackend.Models
 {
-    public class Cliente
+    public class Endereco
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
         [Required]
-        public required string Nome { get; set; }
-
+        public required string Logradouro { get; set; }
+        public required string Numero { get; set; }
+        public required string Complemento { get; set; }
         [Required]
-        public required string Cpf { get; set; }
-
+        public required string Bairro { get; set; }
         [Required]
-        public required string Data_de_Nascimento { get; set; }
-
+        public required string Cidade { get; set; }
         [Required]
-        public required string Telefone { get; set; }
-
-        [Required]
-        public required string Cep { get; set; }
-
-        [Required]
-        public required Endereco Endereco { get; set; }
-
+        public required string Estado { get; set; }
     }
 }

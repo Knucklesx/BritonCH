@@ -35,13 +35,20 @@ input[type="tel"] {
   box-sizing: border-box;
 }
 
+input.invalid {
+  border-color: red;
+}
 
-.estado {
-  margin-bottom: 10px;
+.cep-container {
+  display: flex;
+  gap: 10px;
+}
+
+.cep-container input[type="text"] {
+  flex: 1;
 }
 
 button {
-  width: 100%;
   padding: 10px;
   background-color: #8b4513;
   color: #fff;
@@ -53,4 +60,18 @@ button {
 
 button:hover {
   background-color: #a0522d;
+}
+
+button.cadastrar {
+  width: 100%;
+}
+
+button.buscar-cep {
+  width: auto;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
 }

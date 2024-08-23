@@ -343,3 +343,7 @@ BretonBackend/Migrations/20240823123045_LoginAndUserMigration.Designer.cs
 BretonBackend/Migrations/20240823123834_AddCors.cs
 BretonBackend/Migrations/20240823123834_AddCors.Designer.cs
 BretonBackend/Migrations/BretonContextModelSnapshot.cs
+BretonBackend/Migrations/20240823134246_FullClientModel.cs
+BretonBackend/Migrations/20240823134246_FullClientModel.Designer.cs
+BretonBackend/Migrations/20240823172934_DelEnd2PutNumero.cs
+BretonBackend/Migrations/20240823172934_DelEnd2PutNumero.Designer.cs

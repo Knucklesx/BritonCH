@@ -38,7 +38,7 @@ export class LoginComponent {
       .subscribe(
         (response: string) => {
           if (response === 'Login successful') {
-            this.router.navigate(['/user-register']);
+            this.router.navigate(['/main']);
           } else {
             this.dialog.open(ErrorModalComponent);
           }
