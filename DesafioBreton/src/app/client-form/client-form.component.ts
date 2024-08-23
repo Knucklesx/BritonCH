@@ -8,6 +8,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { SuccessModalComponent } from '../success-modal/success-modal.component';
 
 @Component({
   selector: 'app-client-form',
@@ -19,7 +22,12 @@ import {
 export class ClientFormsComponent {
   clientForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private dialog: MatDialog,
+    private router: Router
+  ) {
     this.clientForm = this.fb.group({
       nome: ['', Validators.required],
       cpf: ['', [Validators.required, this.cpfValidator]],
@@ -44,7 +52,7 @@ export class ClientFormsComponent {
       console.log(clientData);
       this.http.post('http://localhost:5069/api/Client', clientData).subscribe({
         next: (data) => {
-          console.log('Cliente cadastrado com sucesso', data);
+          this.openSuccessModal();
         },
         error: (error) => {
           console.error('Erro ao cadastrar cliente', error);
@@ -53,6 +61,14 @@ export class ClientFormsComponent {
     } else {
       this.clientForm.markAllAsTouched();
     }
+  }
+
+  openSuccessModal() {
+    const dialogRef = this.dialog.open(SuccessModalComponent);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/main']);
+    });
   }
 
   onCepInput() {
