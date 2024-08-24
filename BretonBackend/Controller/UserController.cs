@@ -6,6 +6,7 @@ using BretonBackend.Data;
 using BretonBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using BCrypt.Net;
 
 namespace BretonBackend.Controller
 {
@@ -14,10 +15,12 @@ namespace BretonBackend.Controller
     public class UserController : ControllerBase
     {
         private readonly BretonContext _bretonContext;
+        private readonly IConfiguration _configuration;
 
-        public UserController(BretonContext bretonContext)
+        public UserController(BretonContext bretonContext, IConfiguration configuration)
         {
             _bretonContext = bretonContext;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -41,6 +44,14 @@ namespace BretonBackend.Controller
         [HttpPost]
         public ActionResult Post([FromBody] User user)
         {
+            // var newUser = new User
+            // {
+            //     Email = user.Email,
+            //     Nome = user.Nome,
+            //     Senha = BCrypt.Net.BCrypt.HashPassword(user.Senha),
+            //     Role = "user",
+            // };
+            // _bretonContext.Users.Add(newUser);
             _bretonContext.Users.Add(user);
             _bretonContext.SaveChanges();
             return CreatedAtAction(nameof(Get), new { id = user.Id }, user);

@@ -1,11 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using BretonBackend.Data;
 using BretonBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using BCrypt.Net;
 
 namespace BretonBackend.Controller
 {
@@ -14,6 +19,7 @@ namespace BretonBackend.Controller
     public class LoginController : ControllerBase
     {
         private readonly BretonContext _bretonContext;
+
 
         public LoginController(BretonContext bretonContext)
         {
@@ -31,14 +37,15 @@ namespace BretonBackend.Controller
             var user = await _bretonContext.Users
                 .FirstOrDefaultAsync(u => u.Email == loginRequest.Email && u.Senha == loginRequest.Senha);
 
+
             if (user == null)
             {
                 return Unauthorized("Invalid credentials");
             }
 
-            // Aqui você pode gerar um token JWT ou retornar uma mensagem de sucesso
-            // Para simplificação, vamos retornar uma mensagem de sucesso
-            return Ok("Login successful");
+            // return Ok("Login successful");
+            return Ok(user);
         }
     }
 }
+

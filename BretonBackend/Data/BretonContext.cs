@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BretonBackend.Data
 {
+    // public class BretonContext : DbContext
     public class BretonContext : DbContext
     {
 
