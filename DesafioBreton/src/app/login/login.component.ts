@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ErrorModalComponent } from '../error-modal/error-modal.component';
+import { UserLoginResponse } from '../helper/client.interface';
+import { SessaoService } from '../sessao.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private sessaoService: SessaoService
   ) {
     this.loginForm = this.fb.group({
       email: [''],
@@ -30,14 +33,18 @@ export class LoginComponent {
     console.log(this.loginForm.value);
     const { email, senha } = this.loginForm.value;
     this.http
-      .post(
+      .post<UserLoginResponse>(
         'http://localhost:5069/api/Login/login',
-        { email, senha },
-        { responseType: 'text' }
+        { email, senha }
+        // { responseType: 'text' }
       )
       .subscribe(
-        (response: string) => {
-          if (response === 'Login successful') {
+        (response) => {
+          if (response.role === 'user') {
+            this.sessaoService.salvarSessao({
+              email: response.email,
+              accessToken: response.role,
+            });
             this.router.navigate(['/main']);
           } else {
             this.dialog.open(ErrorModalComponent);

@@ -1,4 +1,5 @@
 export interface Client {
+  id: number;
   nome: string;
   telefone: string;
   cpf: string;
@@ -10,7 +11,7 @@ export interface ClientFull {
   id: number;
   nome: string;
   cpf: string;
-  data_de_nascimento: string;
+  data_de_Nascimento: string;
   telefone: string;
   CEP: string;
   logradouro: string;
@@ -18,6 +19,13 @@ export interface ClientFull {
   complemento: string;
   bairro: string;
   cidade: string;
-  uf: string;
+  estado: string;
   cep: string;
+}
+
+export interface UserLoginResponse {
+  nome: string;
+  email: string;
+  senha: string;
+  role: string;
 }

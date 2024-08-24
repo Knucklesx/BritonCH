@@ -47,11 +47,11 @@ export class MainDashboardComponent implements OnInit {
   }
 
   addClient() {
-    console.log('clicou');
     this.router.navigate(['/client-register']); // Redirecione para a rota /register-client
   }
 
-  editClient(client: Client) {
-    console.log('Editar cliente', client);
+  editClient(clientId: number) {
+    console.log('Editando cliente', clientId);
+    this.router.navigate(['/edit-client', clientId]);
   }
 }
