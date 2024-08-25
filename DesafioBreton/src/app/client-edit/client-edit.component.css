@@ -75,3 +75,15 @@ button.buscar-cep {
   font-size: 12px;
   margin-top: 5px;
 }
+
+.delete-button {
+  background-color: transparent;
+  color: red;
+  border: 1px solid red;
+  margin-top: 10px;
+}
+
+.delete-button:hover {
+  background-color: red;
+  color: white;
+}

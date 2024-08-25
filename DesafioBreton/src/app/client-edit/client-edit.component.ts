@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeleteConfirmationModalComponent } from '../delete-modal/delete-modal.component';
 import { ClientFull } from '../helper/client.interface';
 import { SuccessModalComponent } from '../success-modal/success-modal.component';
 
@@ -138,5 +139,29 @@ export class ClientEditComponent implements OnInit {
           console.error('Erro ao buscar cliente', error);
         },
       });
+  }
+
+  deleteClient() {
+    const dialogRef = this.dialog.open(DeleteConfirmationModalComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const clientId = this.activatedRoute.snapshot.paramMap.get('id');
+        console.log('clientId', clientId);
+        if (clientId) {
+          this.http
+            .delete(`http://localhost:5069/api/Client/${clientId}`)
+            .subscribe(
+              () => {
+                this.router.navigate(['/main']);
+              },
+              (error) => {
+                console.error('Erro ao deletar cliente', error);
+                alert('Erro ao deletar cliente');
+              }
+            );
+        }
+      }
+    });
   }
 }

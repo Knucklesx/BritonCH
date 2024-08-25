@@ -116,6 +116,7 @@ namespace BretonBackend.Controller
                 return NotFound();
             }
             _bretonContext.Clientes.Remove(cliente);
+            _bretonContext.SaveChanges();
             return NoContent();
         }
     }

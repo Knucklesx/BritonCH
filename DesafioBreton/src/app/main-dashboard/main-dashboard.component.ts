@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router'; // Importe o Router
+import { Router } from '@angular/router';
 import { Client } from '../helper/client.interface';
+import { SessaoService } from '../sessao.service';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -16,7 +17,11 @@ export class MainDashboardComponent implements OnInit {
   clients: Client[] = [];
   filteredClients: Client[] = [];
 
-  constructor(private http: HttpClient, private router: Router) {} // Injete o Router
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private sessionService: SessaoService
+  ) {}
 
   ngOnInit() {
     this.fetchClients();
@@ -47,11 +52,19 @@ export class MainDashboardComponent implements OnInit {
   }
 
   addClient() {
-    this.router.navigate(['/client-register']); // Redirecione para a rota /register-client
+    this.router.navigate(['/client-register']);
   }
 
   editClient(clientId: number) {
     console.log('Editando cliente', clientId);
     this.router.navigate(['/edit-client', clientId]);
+  }
+
+  logoutFunction() {
+    this.sessionService.limparSessao();
+    this.router.navigate(['']);
+  }
+  addUser() {
+    this.router.navigate(['/user-register']);
   }
 }
