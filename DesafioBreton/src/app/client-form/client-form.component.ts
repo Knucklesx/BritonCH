@@ -48,6 +48,9 @@ export class ClientFormsComponent {
       const clientData = {
         ...this.clientForm.value,
         estado: this.clientForm.get('uf')?.value,
+        data_de_Nascimento: new Date(
+          this.clientForm.get('data_de_Nascimento')?.value
+        ),
       };
       console.log(clientData);
       this.http.post('http://localhost:5069/api/Client', clientData).subscribe({

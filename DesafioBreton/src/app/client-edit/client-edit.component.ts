@@ -129,7 +129,15 @@ export class ClientEditComponent implements OnInit {
       .get<ClientFull>(`http://localhost:5069/api/Client/${id}`)
       .subscribe({
         next: (data) => {
-          this.clientForm.patchValue({ ...data, uf: data.estado });
+          const formattedDate = new Date(data.data_de_Nascimento)
+            .toISOString()
+            .substring(0, 10);
+
+          this.clientForm.patchValue({
+            ...data,
+            uf: data.estado,
+            data_de_Nascimento: formattedDate,
+          });
           this.clientForm.get('nome')?.disable();
           this.clientForm.get('cpf')?.disable();
           this.clientForm.get('data_de_Nascimento')?.disable();

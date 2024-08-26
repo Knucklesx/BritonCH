@@ -20,7 +20,8 @@ namespace BretonBackend.Models
         public required string Cpf { get; set; }
 
         [Required]
-        public required string Data_de_Nascimento { get; set; }
+        // public required string Data_de_Nascimento { get; set; }
+        public required DateTime Data_de_Nascimento { get; set; }
 
         [Required]
         public required string Telefone { get; set; }
