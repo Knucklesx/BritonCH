@@ -1,9 +1,19 @@
+# services:
+#   db:
+#     image: mysql:8.0
+#     environment:
+#       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+#       MYSQL_DATABASE: ${MYSQL_DATABASE}
+#     ports:
+#       - "3307:3306"
+#     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 services:
   db:
-    image: mysql:8.0
+    image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      SA_PASSWORD: ${SA_PASSWORD}
+      ACCEPT_EULA: "Y"
+      MSSQL_DATABASE: ${MSSQL_DATABASE}
     ports:
-      - "3307:3306"
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      - "1433:1433"
+    command: /opt/mssql/bin/sqlservr
