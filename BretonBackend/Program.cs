@@ -2,7 +2,6 @@ using BretonBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
 using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using BretonBackend.Models;
 using Microsoft.AspNetCore.Identity;
@@ -10,16 +9,12 @@ using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 Env.Load();
 
 builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddDbContext<BretonContext>(options =>
-    options.UseMySql(
-        Environment.GetEnvironmentVariable("CONNECTION_STRING"),
-        new MySqlServerVersion(new Version(8, 0, 25))
-    )
+    options.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING"))
 );
 
 
@@ -37,7 +32,6 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod());
 });
 
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -46,12 +40,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-
-
 app.UseCors("AllowSpecificOrigin");
-
-
 
 app.UseHttpsRedirection();
 app.UseRouting();

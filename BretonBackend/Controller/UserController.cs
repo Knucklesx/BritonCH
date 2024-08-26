@@ -6,7 +6,6 @@ using BretonBackend.Data;
 using BretonBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BCrypt.Net;
 
 namespace BretonBackend.Controller
 {

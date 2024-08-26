@@ -1,13 +1,14 @@
+using BretonBackend.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using BretonBackend.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace BretonBackend.Data
 {
-    // public class BretonContext : DbContext
     public class BretonContext : DbContext
     {
 
@@ -20,8 +21,9 @@ namespace BretonBackend.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
-            // optionsBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 25)));
-            optionsBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 25)));
+            optionsBuilder
+                .UseSqlServer(connectionString)
+                .UseLazyLoadingProxies();
         }
 
         public DbSet<Cliente> Clientes { get; set; }

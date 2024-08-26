@@ -10,7 +10,7 @@ using BretonBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using BCrypt.Net;
+
 
 namespace BretonBackend.Controller
 {
