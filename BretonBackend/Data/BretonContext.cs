@@ -29,5 +29,20 @@ namespace BretonBackend.Data
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public void Seed()
+        {
+            if (!Users.Any())
+            {
+                Users.Add(new User
+                {
+                    Nome = "Usuário1",
+                    Email = "usuario1@gmail.com",
+                    Senha = "1",
+                    Role = "user"
+                });
+                SaveChanges();
+            }
+        }
+
     }
 }

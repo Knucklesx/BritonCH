@@ -358,3 +358,4 @@ BretonBackend/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
 BretonBackend/obj/
 BretonBackend/obj/BretonBackend.csp.EntityFrameworkCore.targets
 DesafioBreton/src/app/.env
+BretonBackend/Data/bretonContext2.txt
