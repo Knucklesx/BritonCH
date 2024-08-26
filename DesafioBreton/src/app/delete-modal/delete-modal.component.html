@@ -1,6 +1,10 @@
-<h2>Confirmar Deleção</h2>
-<p>Você tem certeza que deseja deletar este cliente?</p>
-<div class="modal-actions">
-  <button (click)="onCancel()">Cancelar</button>
-  <button (click)="onDelete()">Deletar</button>
+<div class="modal-overlay">
+  <div class="modal-container">
+    <h2>Confirmar Deleção</h2>
+    <p>Você tem certeza que deseja deletar este cliente?</p>
+    <div class="modal-actions">
+      <button (click)="onCancel()" class="cancel-button">Cancelar</button>
+      <button (click)="onDelete()" class="delete-button">Deletar</button>
+    </div>
+  </div>
 </div>

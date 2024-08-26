@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-error-modal',
@@ -9,10 +9,15 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './error-modal.component.css',
 })
 export class ErrorModalComponent {
-  constructor(public dialogRef: MatDialogRef<ErrorModalComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<ErrorModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { entityName: string }
+  ) {}
 
   onClose(): void {
     this.dialogRef.close();
-    window.location.reload();
+    if (this.data.entityName === 'Erro ao logar') {
+      window.location.reload();
+    }
   }
 }

@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { SuccessModalComponent } from '../success-modal/success-modal.component';
+import { ModalService } from '../helper/modal.service';
 
 @Component({
   selector: 'app-client-form',
@@ -26,7 +26,8 @@ export class ClientFormsComponent {
     private fb: FormBuilder,
     private http: HttpClient,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private modalService: ModalService
   ) {
     this.clientForm = this.fb.group({
       nome: ['', Validators.required],
@@ -55,23 +56,16 @@ export class ClientFormsComponent {
       console.log(clientData);
       this.http.post('http://localhost:5069/api/Client', clientData).subscribe({
         next: (data) => {
-          this.openSuccessModal();
+          this.modalService.openSuccessModal('Cliente cadastrado com Sucesso!');
         },
         error: (error) => {
-          console.error('Erro ao cadastrar cliente', error);
+          // console.error('Erro ao cadastrar cliente', error);
+          this.modalService.openErrorModal('CPF informado já cadastrado');
         },
       });
     } else {
       this.clientForm.markAllAsTouched();
     }
-  }
-
-  openSuccessModal() {
-    const dialogRef = this.dialog.open(SuccessModalComponent);
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.router.navigate(['/main']);
-    });
   }
 
   onCepInput() {

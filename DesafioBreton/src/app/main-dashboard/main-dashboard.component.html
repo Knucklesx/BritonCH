@@ -6,8 +6,9 @@
     </ul>
   </aside>
   <main class="main-content">
+    <h2>Clientes</h2>
     <div class="header">
-      <input type="text" placeholder="Buscar clientes..." (input)="filterClients($event)">
+      <input class="search-input" type="text" placeholder="Buscar clientes..." (input)="filterClients($event)">
       <button class="main-button" (click)="addClient()">Adicionar Cliente</button>
     </div>
     <div class="client-list">

@@ -12,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeleteConfirmationModalComponent } from '../delete-modal/delete-modal.component';
 import { ClientFull } from '../helper/client.interface';
-import { SuccessModalComponent } from '../success-modal/success-modal.component';
+import { ModalService } from '../helper/modal.service';
 
 @Component({
   selector: 'app-client-edit',
@@ -30,7 +30,8 @@ export class ClientEditComponent implements OnInit {
     private http: HttpClient,
     private dialog: MatDialog,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private modalService: ModalService
   ) {
     this.clientForm = this.fb.group({
       nome: ['', Validators.required],
@@ -70,7 +71,7 @@ export class ClientEditComponent implements OnInit {
         .put(`http://localhost:5069/api/Client/${this.clientId}`, clientData)
         .subscribe({
           next: (data) => {
-            this.openSuccessModal();
+            this.modalService.openSuccessModal('Cliente editado com sucesso!');
           },
           error: (error) => {
             console.error('Erro ao cadastrar cliente', error);
@@ -79,14 +80,6 @@ export class ClientEditComponent implements OnInit {
     } else {
       this.clientForm.markAllAsTouched();
     }
-  }
-
-  openSuccessModal() {
-    const dialogRef = this.dialog.open(SuccessModalComponent);
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.router.navigate(['/main']);
-    });
   }
 
   onCepInput() {

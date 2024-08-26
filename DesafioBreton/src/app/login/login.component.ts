@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ErrorModalComponent } from '../error-modal/error-modal.component';
 import { UserLoginResponse } from '../helper/client.interface';
+import { ModalService } from '../helper/modal.service';
 import { SessaoService } from '../sessao.service';
 
 @Component({
@@ -21,7 +21,8 @@ export class LoginComponent {
     private http: HttpClient,
     private router: Router,
     public dialog: MatDialog,
-    private sessaoService: SessaoService
+    private sessaoService: SessaoService,
+    private modalService: ModalService
   ) {
     this.loginForm = this.fb.group({
       email: [''],
@@ -47,11 +48,11 @@ export class LoginComponent {
             });
             this.router.navigate(['/main']);
           } else {
-            this.dialog.open(ErrorModalComponent);
+            this.modalService.openErrorModal('Erro ao logar');
           }
         },
         (error) => {
-          this.dialog.open(ErrorModalComponent);
+          this.modalService.openErrorModal('E-mail ou Senha incorreto');
         }
       );
   }

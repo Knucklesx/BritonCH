@@ -17,12 +17,11 @@ namespace BretonBackend.Controller
         //UPDATE => PUT (Or PATCH => Partial Update)
         //DELETE => DELETE
         private readonly BretonContext _bretonContext;
-        private readonly ILogger<ClientController> _logger;
 
-        public ClientController(BretonContext bretonContext, ILogger<ClientController> logger)
+
+        public ClientController(BretonContext bretonContext)
         {
             _bretonContext = bretonContext;
-            _logger = logger;
         }
 
 
@@ -34,39 +33,32 @@ namespace BretonBackend.Controller
             return Ok(clientes);
         }
 
-        //GET api/client/{id}
-        // [HttpGet("{id}")]
-        // public ActionResult<Cliente> Get(int id)
-        // {
-        //     var cliente = _bretonContext.Clientes.FirstOrDefault(c => c.Id == id);
-        //     if (cliente == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     return Ok(cliente);
-        // }
+
         [HttpGet("{id}")]
         public ActionResult<Cliente> Get(int id)
         {
-            _logger.LogInformation($"Recebendo solicitação para obter cliente com ID: {id}");
 
             var cliente = _bretonContext.Clientes.FirstOrDefault(c => c.Id == id);
             if (cliente == null)
             {
-                _logger.LogWarning($"Cliente com ID: {id} não encontrado.");
+
                 return NotFound();
             }
 
-            _logger.LogInformation($"Cliente com ID: {id} encontrado.");
+
             return Ok(cliente);
         }
-
 
         //POST api/client
         [HttpPost]
         public ActionResult Post([FromBody] Cliente cliente)
         {
+            var CpfFind = _bretonContext.Clientes.FirstOrDefault(c => c.Cpf == cliente.Cpf);
 
+            if (CpfFind != null)
+            {
+                return Conflict(new { message = "CPF já cadastrado" });
+            }
 
             _bretonContext.Clientes.Add(cliente);
             _bretonContext.SaveChanges();

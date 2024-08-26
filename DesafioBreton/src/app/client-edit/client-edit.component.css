@@ -62,9 +62,10 @@ button:hover {
   background-color: #a0522d;
 }
 
-button.cadastrar {
+button.cadastrar, button.delete-button {
   width: 100%;
 }
+
 
 button.buscar-cep {
   width: auto;

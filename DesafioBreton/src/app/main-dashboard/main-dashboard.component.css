@@ -43,7 +43,17 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 2 2 66.66%; /* 2/3 do tamanho total */
+  max-width: 75%; /* Limite máximo de 3/4 do tamanho total */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .client-list {
@@ -59,12 +69,23 @@ table {
 
 th, td {
   padding: 10px;
-  border: 1px solid #ddd;
   text-align: left;
 }
 
 th {
   background-color: #f4f4f4;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+td, th {
+  border: none;
 }
 
 button {
@@ -89,13 +110,10 @@ button.buscar-cep {
   margin-top: 5px;
 }
 
-
 .sidebar-button {
   background-color: transparent;
   color: #8b4513;
 }
-
-
 
 .main-button {
   background-color: #8b4513;

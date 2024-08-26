@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {
   AbstractControl,
@@ -7,7 +8,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { ModalService } from '../helper/modal.service';
 @Component({
   selector: 'app-user-form',
   standalone: true,
@@ -17,7 +20,13 @@ import {
 })
 export class UserFormComponent {
   userForm: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private dialog: MatDialog,
+    private router: Router,
+    private modalService: ModalService
+  ) {
     this.userForm = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, this.emailValidator]],
@@ -26,7 +35,22 @@ export class UserFormComponent {
   }
   onSubmit() {
     console.log(this.userForm.value);
+    if (this.userForm.valid) {
+      const user = {
+        ...this.userForm.value,
+        role: 'user',
+      };
+      this.http.post('http://localhost:5069/api/User', user).subscribe({
+        next: (data) => {
+          this.modalService.openSuccessModal('Usuário cadastrado com Sucesso!');
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+    }
   }
+
   emailValidator(controle: AbstractControl) {
     const email = controle.value;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
