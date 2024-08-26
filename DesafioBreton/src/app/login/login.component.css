@@ -6,6 +6,12 @@ body {
   color: #8b4513;
 }
 
+.login-button:disabled {
+  background-color: #d3d3d3;
+  color: #a9a9a9;
+  cursor: not-allowed;
+}
+
 form {
   max-width: 600px;
   margin: 50px auto;

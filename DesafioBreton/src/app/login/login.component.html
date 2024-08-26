@@ -8,10 +8,9 @@
     <input type="password" id="senha" name="senha" formControlName="senha" required>
   </div>
   <div>
-    <button>Fazer Login</button>
+    <button [disabled]="loginForm.invalid" class="login-button">Fazer Login</button>
   </div>
   <div>
-    <!-- <a href="/register">Registrar-se</a> -->
     <a href="user-register">Registre-se</a>
   </div>
 </form>

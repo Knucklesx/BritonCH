@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserLoginResponse } from '../helper/client.interface';
@@ -12,10 +17,11 @@ import { SessaoService } from '../sessao.service';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
+
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
@@ -25,8 +31,8 @@ export class LoginComponent {
     private modalService: ModalService
   ) {
     this.loginForm = this.fb.group({
-      email: [''],
-      senha: [''],
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', Validators.required],
     });
   }
 
@@ -34,11 +40,10 @@ export class LoginComponent {
     console.log(this.loginForm.value);
     const { email, senha } = this.loginForm.value;
     this.http
-      .post<UserLoginResponse>(
-        'http://localhost:5069/api/Login/login',
-        { email, senha }
-        // { responseType: 'text' }
-      )
+      .post<UserLoginResponse>('http://localhost:5069/api/Login/login', {
+        email,
+        senha,
+      })
       .subscribe(
         (response) => {
           if (response.role === 'user') {
