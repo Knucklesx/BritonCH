@@ -1,15 +1,26 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <div>
     <label for="nome">Nome:</label>
-    <input type="text" id="name" name="nome" formControlName="nome" required>
+    <input type="text" id="name" name="nome" formControlName="nome" required
+      [class.invalid]="userForm.get('nome')?.invalid && userForm.get('nome')?.touched" required>
+    <div *ngIf="userForm.get('nome')?.invalid && userForm.get('nome')?.touched" class="error">
+      O campo Nome é obrigatório.
+    </div>
   </div>
   <div>
     <label for="email">E-mail:</label>
-    <input type="text" id="email" name="email" formControlName="email" required>
+    <input type="text" id="email" name="email" formControlName="email" required
+      [class.invalid]="userForm.get('email')?.invalid && userForm.get('email')?.touched" required>
+    <div *ngIf="userForm.get('email')?.errors?.['emailInvalido'] && userForm.get('email')?.touched" class="error">O
+      e-mail é inválido.</div>
   </div>
   <div>
     <label for="senha">Senha:</label>
-    <input type="text" id="senha" name="senha" formControlName="senha" required>
+    <input type="text" id="senha" name="senha" formControlName="senha" required
+      [class.invalid]="userForm.get('senha')?.invalid && userForm.get('senha')?.touched" required>
+    <div *ngIf="userForm.get('senha')?.errors?.['senhaInvalida'] && userForm.get('senha')?.touched" class="error">A
+      senha deve conter pelo menos 8 caracteres, incluindo
+      uma letra maiúscula, uma letra minúscula e um número.</div>
   </div>
   <div>
     <button type="submit">Cadastrar</button>
